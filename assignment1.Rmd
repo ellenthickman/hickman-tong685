@@ -88,8 +88,7 @@ $$
 $$
 H_1: \mu_{\text{coastal}} \neq \mu_{\text{non-coastal}}
 $$
-First, we test whether the variances are equal to each other, this will help use determine what
-kind of t-test to execute (equal or unequal variances).
+* First, we test whether the variances are equal to each other, this will help use determine what kind of t-test to execute (equal or unequal variances).
 Step 1) homogeneity of variance test
 
 ```{r}
@@ -97,13 +96,13 @@ coastal <- subset(hprice, ajwtr == 1)$homeprice
 noncoastal <- subset(hprice, ajwtr == 0)$homeprice
 var.test(coastal, noncoastal)
 ```
-Variances are unequal at a p-value less than 0.005. 
+* Variances are unequal at a p-value less than 0.005. 
 Step 2)
 t.test
 ```{r}
 t.test(coastal, noncoastal, var.equal = FALSE)
 ```
-With a p-value lower than a set-value of 0.005, we find that the means of each coastal and 
+* With a p-value lower than a set-value of 0.005, we find that the means of each coastal and 
 non-coastal sample ($111,243 and $82,388, respectively) to be statistically significant.
 
 ### 5. Estimate the Pearson correlation coefficient between homeprice and per capita income of the MSA of a given year, noted in ypc
