@@ -129,6 +129,7 @@ cor.test(hprice$homeprice, hprice$ypc)
 * Given the p-value is less than 0.005, we reject the null hypothesis that the correlation coefficient of 0.74 between home prices is equal to zero. 
 
 ### 7.Can you say that per capita income has an effect on the home sales price using the results from #6)? Why or why not?
+* No, this is simply degree in which two variables move together --  showing a strong, positive relationship in this case. It does not mean there is a causal effect, because this relationship could be caused by an extraneous third variable, like interest rates. Using this data and these topics of interest, I would suggest utilizing some causal inference methods to establish assumptions of causality because it is difficult to experimentally control individuals' income to observe home sales price. 
 
  
 ### 8. Test the normality of homeprice. Would this test result change your responsesto #1) to 7)? Why or why not
