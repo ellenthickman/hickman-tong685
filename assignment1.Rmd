@@ -132,7 +132,7 @@ cor.test(hprice$homeprice, hprice$ypc)
 * No, this is simply degree in which two variables move together --  showing a strong, positive relationship in this case. It does not mean there is a causal effect, because this relationship could be caused by an extraneous third variable, like interest rates. Using this data and these topics of interest, I would suggest utilizing some causal inference methods to establish assumptions of causality because it is difficult to experimentally control individuals' income to observe home sales price. 
 
  
-### 8. Test the normality of homeprice. Would this test result change your responsesto #1) to 7)? Why or why not
+### 8. Test the normality of homeprice. Would this test result change your responses to #1) or to 7)? Why or why not
 ```{r}
 ggplot(hprice, aes(x=homeprice)) + geom_histogram(binwidth=5)
 qqnorm(hprice$homeprice, main="hprice", ylab="y_{i:n}", xlab="m_{i:n}") 
@@ -142,3 +142,6 @@ qqline(hprice$homeprice, col="red",lwd=2)
 ```{r}
 shapiro.test(hprice$homeprice)
 ```
+* By using the histogram, qq-plot, and SW normality test (p<0.005), we can reject the null that the distribution of homeprice is normal. 
+* This does not change our assessment to #1, as I did not state that homeprice was normally distributed with the said mean and said variance. It was actually my suspicison since I observed a positive right skew in the data. 
+* Nor changes our assessment to #7 because non-normality is not relevant in stating correlation does not equal causation. Causation can only be determine by controlling variables in an experiment, or using particularly strong quasi-experimental methods. 
