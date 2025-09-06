@@ -119,5 +119,14 @@ cor.test(hprice$homeprice, hprice$ypc)
 
 ### 7.Can you say that per capita income has an effect on the home sales price using the results from #6)? Why or why not?
 
+ 
+### 8. Test the normality of homeprice. Would this test result change your responsesto #1) to 7)? Why or why not
+```{r}
+ggplot(hprice, aes(x=homeprice)) + geom_histogram(binwidth=5)
+qqnorm(hprice$homeprice, main="hprice", ylab="y_{i:n}", xlab="m_{i:n}") 
+qqline(hprice$homeprice, col="red",lwd=2)
+```
 
-8 Test the normality of homeprice. Would this test result change your responsesto #1) to 7)? Why or why not
+```{r}
+shapiro.test(hprice$homeprice)
+```
