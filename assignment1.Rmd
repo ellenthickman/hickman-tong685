@@ -27,7 +27,7 @@ summary(hprice)
 mean(hprice$homeprice)
 var(hprice$homeprice)
 ```
-* Between the year 1986-1994, the mean of the homeprices in 324 MSAs is `mean(hprice$homeprice)` dollars, with a large variance of `var(hprice$homeprice)` dollars. The average house price is slightly larger than the median, meaning there is a positive right skew to the distribution. The variance is quite large, in the billions, possibly due to sampling across 9 years.
+* Between the year 1986-1994, the mean of the homeprices in 324 MSAs is `mean(hprice$homeprice)` dollars, with a large variance of `var(hprice$homeprice)` dollars. The average house price is slightly larger than the median, meaning there is a positive right skew to the distribution. The variance is quite large, in the billions, since it is expressed in squared units.
 
 ##  2.Construct a 95% confidence interval of the average homeprice. What does the confidence interval imply?
 A. by hand
@@ -78,7 +78,8 @@ se_noncoastal
 
 **Hypotheses**
 
-We test whether the average home price differs between coastal and non-coastal MSAs:
+We test whether the average home price differs between coastal and non-coastal MSAs using a 
+two-tailed t-test. We use the two-tailed t-test as it tests whether the means of each sample are equal to each other (null hypothesis) or statistically differ from each other (alternative hypothesis):
 
 $$
 H_0: \mu_{\text{coastal}} = \mu_{\text{non-coastal}}
@@ -87,7 +88,8 @@ $$
 $$
 H_1: \mu_{\text{coastal}} \neq \mu_{\text{non-coastal}}
 $$
-
+First, we test whether the variances are equal to each other, this will help use determine what
+kind of t-test to execute (equal or unequal variances).
 Step 1) homogeneity of variance test
 
 ```{r}
@@ -95,12 +97,14 @@ coastal <- subset(hprice, ajwtr == 1)$homeprice
 noncoastal <- subset(hprice, ajwtr == 0)$homeprice
 var.test(coastal, noncoastal)
 ```
-
+Variances are unequal at a p-value less than 0.005. 
 Step 2)
 t.test
 ```{r}
 t.test(coastal, noncoastal, var.equal = FALSE)
 ```
+With a p-value lower than a set-value of 0.005, we find that the means of each coastal and 
+non-coastal sample ($111,243 and $82,388, respectively) to be statistically significant.
 
 ### 5. Estimate the Pearson correlation coefficient between homeprice and per capita income of the MSA of a given year, noted in ypc
 ```{r}
