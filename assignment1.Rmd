@@ -1,0 +1,123 @@
+---
+title: "assignment1"
+author: "Grounp Hickman-Tong"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r setup, include=FALSE, tidy=TRUE}
+knitr::opts_chunk$set(echo = TRUE,cache=TRUE, 
+                      autodep=TRUE, cache.comments=FALSE,
+                      message=FALSE, warning=FALSE,
+                      fig.width=4.5, fig.height=3.5)
+```
+
+##  We will use `hprice` data in R package `faraway` <br>
+```{r, echo=FALSE} 
+library(faraway)
+data(hprice, package = "faraway")
+hprice$homeprice <- exp(hprice$narsp)*1000
+head(hprice)
+summary(hprice)
+```
+
+##  1. What is the mean and the variance of homeprice? What do they mean?
+```{r}
+mean(hprice$homeprice)
+var(hprice$homeprice)
+```
+* Between the year 1986-1994, the mean of the homeprices in 324 MSAs is 
+* `mean(hprice$homeprice)` dollars, with a large variance of
+* `var(hprice$homeprice)` dollars. 
+* The average house price is slighlty larger than the median, meaning there is a
+* positive right skew to the distribution. The variance is quite large, in the 
+* billions, possibly due to the small sample size and sampling across 9 years.\
+
+##  2.Construct a 95% confidence interval of the average homeprice. What does the confidence interval imply?
+A. by hand
+```{r}
+n<-dim(hprice)[[1]]
+samvar<-var(hprice$homeprice)/n
+samvar
+
+t.score<-qt(p=.05/2, df=n-1, lower.tail=F)
+t.score
+
+lowCI <- mean(hprice$homeprice)-t.score*sqrt(samvar)
+upCI <- mean(hprice$homeprice)+t.score*sqrt(samvar)
+print(c(lowCI,upCI))
+```
+
+B. by computer
+```{r}
+t.test(hprice$homeprice, conf.level = 0.95)
+```
+
+## 3. Estimate the average homeprice by whether the MAS was adjacent to a coastline, noted in ajwtr, and the standard errors.
+A. coastal
+```{r}
+coastal <- subset(hprice, ajwtr == 1)
+mean_coastal <- mean(coastal$homeprice) 
+se_coastal   <- sd(coastal$homeprice) / sqrt(nrow(coastal))
+
+mean_coastal
+se_coastal
+```
+
+B. noncoastal
+```{r}
+noncoastal <- subset(hprice, ajwtr == 0)
+mean_noncoastal <- mean(noncoastal$homeprice)
+se_noncoastal   <- sd(noncoastal$homeprice) / sqrt(nrow(noncoastal))
+
+mean_noncoastal
+se_noncoastal
+```
+
+
+## 4. Test the difference in homeprice between coastline MSAs and non-coastline MSAs. Clearly state the formula for the hypothesis, the test method and the rationale for the method. What do you conclude about the hypothesis?
+
+## Question 4: Test the difference in homeprice between coastline MSAs and non-coastline MSAs
+
+**Hypotheses**
+
+We test whether the average home price differs between coastal and non-coastal MSAs:
+
+$$
+H_0: \mu_{\text{coastal}} = \mu_{\text{non-coastal}}
+$$
+
+$$
+H_1: \mu_{\text{coastal}} \neq \mu_{\text{non-coastal}}
+$$
+
+Step 1) homogeneity of variance test
+
+```{r}
+coastal <- subset(hprice, ajwtr == 1)$homeprice
+noncoastal <- subset(hprice, ajwtr == 0)$homeprice
+var.test(coastal, noncoastal)
+```
+
+Step 2)
+t.test
+```{r}
+t.test(coastal, noncoastal, var.equal = FALSE)
+```
+
+### 5. Estimate the Pearson correlation coefficient between homeprice and per capita income of the MSA of a given year, noted in ypc
+```{r}
+cor(hprice$homeprice, hprice$ypc)
+```
+
+### 6. Test whether the correlation coefficient between homeprice and ypc is 0 or not. Clearly state the hypothesis including the formula. What do you conclude?
+```{r}
+cor.test(hprice$homeprice, hprice$ypc)
+```
+
+
+### 7.Can you say that per capita income has an effect on the home sales price using the results from #6)? Why or why not?
+
+
+8 Test the normality of homeprice. Would this test result change your responsesto #1) to 7)? Why or why not
