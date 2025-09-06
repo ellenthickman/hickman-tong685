@@ -27,12 +27,7 @@ summary(hprice)
 mean(hprice$homeprice)
 var(hprice$homeprice)
 ```
-* Between the year 1986-1994, the mean of the homeprices in 324 MSAs is 
-* `mean(hprice$homeprice)` dollars, with a large variance of
-* `var(hprice$homeprice)` dollars. 
-* The average house price is slighlty larger than the median, meaning there is a
-* positive right skew to the distribution. The variance is quite large, in the 
-* billions, possibly due to sampling across 9 years.\
+* Between the year 1986-1994, the mean of the homeprices in 324 MSAs is `mean(hprice$homeprice)` dollars, with a large variance of `var(hprice$homeprice)` dollars. The average house price is slightly larger than the median, meaning there is a positive right skew to the distribution. The variance is quite large, in the billions, possibly due to sampling across 9 years.
 
 ##  2.Construct a 95% confidence interval of the average homeprice. What does the confidence interval imply?
 A. by hand
@@ -53,10 +48,9 @@ B. by computer
 ```{r}
 t.test(hprice$homeprice, conf.level = 0.95)
 ```
-* We can be 95% sure that the true value of the mean of the price of a home in
-* US between 1986-1994 falls between the margins of $90,062.70 and $98,760.14.\
+* We can be 95% sure that the true value of the mean of the price of a home in US between 1986-1994 falls between the margins of $90,062.70 and $98,760.14.
 
-## 3. Estimate the average homeprice by whether the MAS was adjacent to a coastline, noted in ajwtr, and the standard errors.
+## 3. Estimate the average homeprice by whether the MSA was adjacent to a coastline, noted in ajwtr, and the standard errors.
 A. coastal
 ```{r}
 coastal <- subset(hprice, ajwtr == 1)
