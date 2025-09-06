@@ -111,10 +111,22 @@ cor(hprice$homeprice, hprice$ypc)
 ```
 
 ### 6. Test whether the correlation coefficient between homeprice and ypc is 0 or not. Clearly state the hypothesis including the formula. What do you conclude?
+* The null hypothesis is that the correlation coefficient between the price of homes and the 
+per capita income of the MSA is equal to zero.
+* The alternative hypothesis is that the correlation coefficient is not equal to zero. 
+* We test using a set alpha value of 0.005. 
+
+$$
+H_0: \rho_\ =\ 0
+$$
+
+$$
+H_1: \rho_\ \neq\ 0
+$$
 ```{r}
 cor.test(hprice$homeprice, hprice$ypc)
 ```
-
+* Given the p-value is less than 0.005, we reject the null hypothesis that the correlation coefficient of 0.74 between home prices is equal to zero. 
 
 ### 7.Can you say that per capita income has an effect on the home sales price using the results from #6)? Why or why not?
 
