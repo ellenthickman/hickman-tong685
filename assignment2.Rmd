@@ -1,0 +1,31 @@
+---
+title: "assignment2"
+author: "Grounp Hickman-Tong"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE, tidy=TRUE}
+knitr::opts_chunk$set(echo = TRUE,cache=TRUE, 
+                      autodep=TRUE, cache.comments=FALSE,
+                      message=FALSE, warning=FALSE,
+                      fig.width=4.5, fig.height=3.5)
+```
+
+1. JWHT Chapter 2. Exercise 5.
+A. What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification?
+* The flexibility of regression/classification models can be inversely and directly related with the interpretability of the model. 
+  * Advantages of a very flexible model include better model fit for data where the true function is not actually linear, ie. the ability to make predictions with
+test data based off training data is high. However, with flexible models it is difficult to actually explain the relationships occurring, meaning that interpretability decreases. But in practice, any gains in predictions made from using flexible models is outweighed by the 
+loss of interpretability. 
+  * Advantages of an inflexible model (ie. linear) are coupled with high 
+interpretability of the relationships between model variables. Obvious 
+disadvantages include that the linear model might not actually capture the true
+function at hand. In all, variance and bias errors experienced by linear, parametric models seem negligible in regards to the ease of interpretability.
+
+B. Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?
+* As flexiblity increases, the chance that the model is biased (ie. there is error introduced by a third unknown variable) decreases faster than the gains in the variance explained increases. Yet at some point, the decreases in bias slow 
+relative to the increases in variance explained, and then one may run the risk of overfitting the data (ie. unable to make predictions with test data) in a more flexible model. When the true function is non-linear & there are a robust #
+of training observations, one should try to fit the more flexible model.
+* In a less flexible model, the chance that there is bias in the estimates increases, while the level variance in y explained by x decreases (esp. for a nonlinear relationship). A less flexible approach is preferred in where the true
+function is linear, but also in most situations of explaining and predicting how y reacts to changes in the x variable(s). 
